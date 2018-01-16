@@ -19,12 +19,13 @@ const config = {
   output: {
     filename: 'bundle.js',
     path: resolve(__dirname, 'dist'),
-    publicPath: '',
+    publicPath: '/',
   },
 
   context: resolve(__dirname, 'app'),
 
   devServer: {
+    historyApiFallback: true,
     hot: true,
     contentBase: resolve(__dirname, 'build'),
     publicPath: '/'
