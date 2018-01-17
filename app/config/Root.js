@@ -1,15 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import { rootReducer } from '../components/Store';
-import App from '../components/App';
-import AppDelta from '../components/AppDelta';
+import { rootReducer } from '../data/Store';
 
+import FirstPage from '../components/controllers/FirstPage';
+import SecondPage from '../components/controllers/SecondPage';
+
+/* configuration for persistent store */
 const persistConfig = {
   key: 'drcrypto',
   storage,
@@ -24,12 +26,12 @@ const Root = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router>
+        <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/delta" component={AppDelta} />
+            <Route exact path="/" component={FirstPage} />
+            <Route path="/second" component={SecondPage} />
           </Switch>
-        </Router>
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   );

@@ -1,10 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { loginAction, logoutAction } from './Store';
+import { loginAction, logoutAction } from '../../data/Store';
+import PageView from '../views/PageView';
 
-class App extends React.Component {
+class SecondPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,17 +21,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Link to="/delta">Delta</Link>
-        <h2 id="heading">Bitcoin will rule the world!</h2>
-        <button onClick={this.toggleLogin}>CLICK ME</button>
-        <p>
-          { this.props.loggedIn ? 'LOGGED IN' : 'LOGGED OUT' }
-        </p>
-        <p>
-          { this.props.token }
-        </p>
-      </div>
+      <PageView
+        linkTo="/"
+        linkToName="First page"
+        title="Sell Bitcoin!"
+        toggleLogin={this.toggleLogin}
+        token={this.props.token}
+        loggedIn={this.props.loggedIn}
+      />
     );
   }
 }
@@ -48,4 +45,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ loginAction, logoutAction }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(SecondPage);

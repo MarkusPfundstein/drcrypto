@@ -1,9 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loginAction, logoutAction } from './Store';
+import { loginAction, logoutAction } from '../../data/Store';
+import PageView from '../views/PageView';
 
-class AppDelta extends React.Component {
+class FirstPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,16 +21,14 @@ class AppDelta extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2 id="heading">Second page!</h2>
-        <button onClick={this.toggleLogin}>CLICK ME</button>
-        <p>
-          { this.props.loggedIn ? 'LOGGED IN' : 'LOGGED OUT' }
-        </p>
-        <p>
-          { this.props.token }
-        </p>
-      </div>
+      <PageView
+        linkTo="/second"
+        linkToName="Second page"
+        title="Buy Bitcoin!"
+        toggleLogin={this.toggleLogin}
+        token={this.props.token}
+        loggedIn={this.props.loggedIn}
+      />
     );
   }
 }
@@ -46,4 +45,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ loginAction, logoutAction }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppDelta);
+export default connect(mapStateToProps, mapDispatchToProps)(FirstPage);
