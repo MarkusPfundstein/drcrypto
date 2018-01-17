@@ -18,11 +18,14 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+/* 'global' objects */
 const reducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(reducer);
 const persistor = persistStore(store);
 
 const Root = () => {
+  /* here we setup the basic app structure. Provider and PersistGate
+   * should be outmost DOM components so that they are 'globally' available */
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
